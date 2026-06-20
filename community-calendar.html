@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Calendar - MST Radio Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="persistent-player.js?v=20260620" defer></script>
+    <style>
+        .calendar-page {
+            background: #2a2a2a;
+            min-height: 100vh;
+            padding: 3.25rem 1.25rem;
+        }
+
+        .calendar-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .calendar-card {
+            background: linear-gradient(140deg, rgba(16, 16, 16, 0.96), rgba(38, 38, 38, 0.94));
+            border: 1px solid rgba(212, 175, 55, 0.72);
+            border-radius: 14px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+            padding: 1.2rem;
+        }
+
+        .calendar-title {
+            margin: 0;
+            color: #ffed4e;
+            font-size: 2rem;
+        }
+
+        .calendar-tabs {
+            display: flex;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+            margin-top: 0.9rem;
+        }
+
+        .calendar-tab {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            border-radius: 999px;
+            padding: 0.34rem 0.78rem;
+            color: #ffed4e;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.86rem;
+            background: rgba(255, 237, 78, 0.08);
+        }
+
+        .calendar-tab.active {
+            background: #d4af37;
+            color: #1a1a1a;
+            border-color: #d4af37;
+        }
+
+        .calendar-tab:hover,
+        .calendar-tab:focus-visible {
+            background: rgba(255, 237, 78, 0.2);
+        }
+
+        .calendar-empty {
+            color: #ffffff;
+            margin: 1rem 0 0;
+            font-size: 1rem;
+        }
+
+        .calendar-panel {
+            margin-top: 0.8rem;
+        }
+
+        .calendar-panel[hidden] {
+            display: none;
+        }
+
+        .past-events-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 0.65rem;
+            max-height: 460px;
+            overflow: auto;
+            padding-right: 0.2rem;
+        }
+
+        .past-event-item {
+            border: 1px solid rgba(212, 175, 55, 0.24);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            padding: 0.65rem 0.75rem;
+        }
+
+        .past-event-link {
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+
+        .past-event-item:hover {
+            border-color: rgba(255, 237, 78, 0.45);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .past-event-date {
+            color: #ffed4e;
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
+        }
+
+        .past-event-title {
+            margin: 0;
+            color: #ffffff;
+            font-size: 0.95rem;
+            line-height: 1.35;
+        }
+
+        .past-event-venue {
+            margin-top: 0.28rem;
+            color: #c7c7c7;
+            font-size: 0.84rem;
+            line-height: 1.35;
+        }
+
+        .calendar-note {
+            color: #d2d2d2;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .calendar-form {
+            display: grid;
+            gap: 0.9rem;
+            margin-top: 0.7rem;
+        }
+
+        .calendar-form label {
+            display: block;
+            color: #ffed4e;
+            font-weight: 600;
+            font-size: 0.93rem;
+            margin-bottom: 0.36rem;
+        }
+
+        .calendar-form input,
+        .calendar-form textarea {
+            width: 100%;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 8px;
+            padding: 0.72rem 0.78rem;
+            background: #151515;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.94rem;
+        }
+
+        .calendar-form textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .file-note {
+            display: block;
+            margin-top: 0.35rem;
+            color: #c8c8c8;
+            font-size: 0.8rem;
+        }
+
+        .calendar-submit {
+            justify-self: start;
+            border: none;
+            border-radius: 8px;
+            background: #d4af37;
+            color: #1a1a1a;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .calendar-submit:hover,
+        .calendar-submit:focus-visible {
+            background: #ffed4e;
+            transform: translateY(-1px);
+        }
+
+        .calendar-back {
+            text-decoration: none;
+            color: #ffed4e;
+            font-weight: 600;
+        }
+
+        @media (max-width: 720px) {
+            .calendar-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="home">
+        <div class="logo">
+            <img src="images/mst-logo.png" alt="MST Logo">
+        </div>
+
+        <div class="menu-toggle">☰</div>
+
+        <ul class="menu">
+            <li><a href="index.html?skipLoading=1#home">Home</a></li>
+            <li><a href="index.html#stations">Stations</a></li>
+            <li><a href="index.html#stations">Listen Live</a></li>
+            <li><a href="index.html#sports">Watch Now</a></li>
+            <li><a href="index.html#news">News</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="index.html#local-listings">Local Listings</a></li>
+            <li><a href="index.html#advertise">Advertise</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a href="index.html#sports" class="live-btn watch-now-disabled" aria-disabled="true">LIVE NOW</a>
+    </header>
+
+    <main class="calendar-page">
+        <section class="calendar-wrap">
+            <article class="calendar-card">
+                <h1 class="calendar-title">Community Calendar</h1>
+                <div class="calendar-tabs" role="tablist" aria-label="Calendar tabs">
+                    <a href="#" class="calendar-tab active" id="tabUpcoming" role="tab" aria-selected="true" aria-controls="upcomingPanel">Upcoming</a>
+                    <a href="#" class="calendar-tab" id="tabPast" role="tab" aria-selected="false" aria-controls="pastPanel">Past</a>
+                </div>
+
+                <div id="upcomingPanel" class="calendar-panel" role="tabpanel" aria-labelledby="tabUpcoming">
+                    <p class="calendar-empty">No upcoming events</p>
+                </div>
+
+                <div id="pastPanel" class="calendar-panel" role="tabpanel" aria-labelledby="tabPast" hidden>
+                    <ul id="pastEventsList" class="past-events-list"></ul>
+                </div>
+            </article>
+
+            <article class="calendar-card">
+                <p class="calendar-note">If you are a Non-Profit Organization and would like to submit an event to our community calendar please fill out the form below.</p>
+
+                <form class="calendar-form" action="#" method="post" enctype="multipart/form-data">
+                    <div>
+                        <label for="eventName">Event Name</label>
+                        <input id="eventName" name="eventName" type="text">
+                    </div>
+
+                    <div>
+                        <label for="eventDateTime">Event Date and Time</label>
+                        <input id="eventDateTime" name="eventDateTime" type="text">
+                    </div>
+
+                    <div>
+                        <label for="eventInfo">Info</label>
+                        <textarea id="eventInfo" name="eventInfo"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="eventFlyer">Event Flyer or attachment</label>
+                        <input id="eventFlyer" name="eventFlyer" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx">
+                        <span class="file-note">Must be under 10 MB</span>
+                    </div>
+
+                    <button type="submit" class="calendar-submit">Send Message</button>
+                </form>
+            </article>
+
+            <a class="calendar-back" href="index.html#local-listings">Go Back to Local Listings</a>
+        </section>
+    </main>
+
+    <script src="community-past-events.js"></script>
+    <script>
+        const tabUpcoming = document.getElementById('tabUpcoming');
+        const tabPast = document.getElementById('tabPast');
+        const upcomingPanel = document.getElementById('upcomingPanel');
+        const pastPanel = document.getElementById('pastPanel');
+        const pastEventsList = document.getElementById('pastEventsList');
+
+        function setCalendarTab(tabName) {
+            const showPast = tabName === 'past';
+            tabUpcoming.classList.toggle('active', !showPast);
+            tabPast.classList.toggle('active', showPast);
+            tabUpcoming.setAttribute('aria-selected', String(!showPast));
+            tabPast.setAttribute('aria-selected', String(showPast));
+            upcomingPanel.hidden = showPast;
+            pastPanel.hidden = !showPast;
+        }
+
+        tabUpcoming.addEventListener('click', (e) => {
+            e.preventDefault();
+            setCalendarTab('upcoming');
+        });
+
+        tabPast.addEventListener('click', (e) => {
+            e.preventDefault();
+            setCalendarTab('past');
+        });
+
+        function renderPastEvents() {
+            const events = Array.isArray(window.COMMUNITY_PAST_EVENTS) ? window.COMMUNITY_PAST_EVENTS : [];
+            if (!events.length) {
+                pastEventsList.innerHTML = '<li class="past-event-item"><p class="past-event-title">No past events available.</p></li>';
+                return;
+            }
+
+            pastEventsList.innerHTML = events.map((event) => {
+                const date = (event.date || '').trim();
+                const title = (event.title || '').trim();
+                const venue = (event.venue || '').trim();
+                const id = Number.isFinite(Number(event.id)) ? Number(event.id) : null;
+                const href = id === null ? '#' : `community-event-detail.html?id=${id}`;
+                return `
+                    <li class="past-event-item">
+                        <a href="${href}" class="past-event-link">
+                            <div class="past-event-date">${date || 'Date TBD'}</div>
+                            <p class="past-event-title">${title || 'Untitled Event'}</p>
+                            ${venue ? `<p class="past-event-venue">${venue}</p>` : ''}
+                        </a>
+                    </li>
+                `;
+            }).join('');
+        }
+
+        renderPastEvents();
+    </script>
+</body>
+</html>

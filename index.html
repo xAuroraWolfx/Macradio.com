@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MST Radio Network - K101, ROCK 105, KNED, COOL 96.7</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnrf.securenetsystems.net" crossorigin>
+    <link rel="dns-prefetch" href="//ice6.securenetsystems.net">
+    <link rel="dns-prefetch" href="//ice5.securenetsystems.net">
+    <link rel="dns-prefetch" href="//ice42.securenetsystems.net">
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-container">
+            <div class="red-circle"></div>
+            <h1 class="on-air-text">ON AIR</h1>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="logo">
+            <img src="images/mst-logo.png" alt="MST Logo">
+        </div>
+
+        <div class="menu-toggle">☰</div>
+
+        <ul class="menu">
+            <li id="signUpMenuItem"><button id="signUpNavBtn" class="nav-sign-up-btn">Sign Up</button></li>
+            <li id="signInMenuItem"><button id="signInNavBtn" class="nav-sign-in-btn">Sign In</button></li>
+            <li id="profileMenuItem" style="display: none;"><span id="userNameDisplay" class="user-name-display"></span></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#stations">Stations</a></li>
+            <li><a href="#stations">Listen Live</a></li>
+            <li><a href="#sports" class="watch-now-trigger watch-now-disabled" aria-disabled="true">Watch Now</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#local-listings">Local Listings</a></li>
+            <li><a href="#advertise">Advertise</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="#sports" class="live-btn watch-now-trigger watch-now-disabled" aria-disabled="true">
+            LIVE NOW
+        </a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+
+            <h1>
+                 The Future Of
+                <span>Radio</span>
+            </h1>
+
+            <p>
+                K101 • ROCK 105 • KNED • COOL 96.7
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#stations" class="btn">
+                    Listen Live
+                </a>
+
+                <a href="#stations" class="btn-outline">
+                    View Stations
+                </a>
+
+                <a href="#sports" class="btn-outline watch-now-trigger watch-now-disabled" aria-disabled="true">
+                    Watch Now
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Stations Section -->
+    <section id="stations" class="stations">
+        <h2>Featured Stations</h2>
+
+        <div class="station-grid">
+
+            <div class="station-card" data-station="K101" data-genre="Today's Best Country">
+                <h3>K101</h3>
+                <p>101.3 FM KMCO • Scott Gaines 6AM-10AM • BG's Lunchbox 10AM-2PM • Austin "Sweet" Wheat 2PM-6PM</p>
+                <button type="button" class="listen-btn">Listen Live</button>
+            </div>
+
+            <div class="station-card" data-station="ROCK 105" data-genre="Classic & Modern Rock">
+                <h3>ROCK 105</h3>
+                <p>Rock 105.1 • Stream live and listen on the Rock 105 smartphone app (iOS + Android).</p>
+                <button type="button" class="listen-btn">Listen Live</button>
+            </div>
+
+            <div class="station-card" data-station="KNED" data-genre="News • Talk • Community">
+                <h3>KNED</h3>
+                <p>1150 AM / 98.3 FM • Cadillac's Country Classics 10AM-2PM • Jim West weekdays 2PM-7PM.</p>
+                <button type="button" class="listen-btn">Listen Live</button>
+            </div>
+
+            <div class="station-card" data-station="COOL 96.7" data-genre="Classic Hits">
+                <h3>COOL 96.7</h3>
+                <p>Classic Hits • Listen on-air or on the Cool 96.7 FM app with full mobile streaming support.</p>
+                <button type="button" class="listen-btn">Listen Live</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Player Section -->
+    <section id="player" class="player">
+        <h2>Listen Live</h2>
+
+        <div class="player-card">
+
+            <h3 id="station-name">K101</h3>
+
+            <p id="station-info">
+                Now playing K101 - Today's Best Country
+            </p>
+
+            <div class="player-art-wrap">
+                <img
+                    id="playerArt"
+                    class="player-art"
+                    src="https://cdnrf.securenetsystems.net/file_radio/stations_large/KMCO/v5/logo.png"
+                    alt="Now playing station art">
+            </div>
+
+            <div class="player-playback-wrap">
+                <p id="liveBroadcastDescription" class="live-broadcast-description" role="status" aria-live="polite">
+                    <span class="live-broadcast-pill">LIVE</span>
+                    <span class="live-broadcast-text">
+                        <span id="liveBroadcastPrimary" class="live-broadcast-primary">On Air</span>
+                        <span id="liveBroadcastSecondary" class="live-broadcast-secondary">Loading update...</span>
+                    </span>
+                    <span id="liveBroadcastTime" class="live-broadcast-time"></span>
+                </p>
+                <audio id="player-audio" preload="none" controls controlsList="nodownload noplaybackrate noremoteplayback" disableremoteplayback>
+                    <source src="https://ice6.securenetsystems.net/KMCO" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="player-volume-control">
+                <button id="playerVolumeMute" class="sound-icon-button" type="button" aria-label="Mute live stream">
+                    <svg viewBox="0 0 24 24" class="sound-icon-svg" aria-hidden="true" focusable="false">
+                        <path class="speaker" d="M3.5 9.5h4.6l4.1-3.5v12l-4.1-3.5H3.5z"></path>
+                        <path class="wave wave-1" d="M14.6 9.2c1.2.8 2 2.1 2 3.8s-.8 3-2 3.8"></path>
+                        <path class="wave wave-2" d="M16.9 6.8c2 1.3 3.3 3.4 3.3 6.2s-1.3 4.9-3.3 6.2"></path>
+                        <path class="mute-slash" d="M16.5 8l5 8"></path>
+                    </svg>
+                </button>
+                <label for="playerVolume" class="player-volume-label">Volume</label>
+                <input id="playerVolume" class="player-volume" type="range" min="0" max="100" step="1" value="100" aria-label="Listen live volume">
+            </div>
+
+        </div>
+    </section>
+
+    <div id="miniPlayer" class="mini-player" role="region" aria-label="Floating mini player">
+        <div class="mini-player-art-wrap" aria-hidden="true">
+            <img id="miniPlayerArt" class="mini-player-art" src="https://cdnrf.securenetsystems.net/file_radio/stations_large/KMCO/v5/logo.png" alt="">
+        </div>
+        <div class="mini-player-meta">
+            <p id="miniPlayerStation" class="mini-player-station">K101</p>
+            <div class="mini-player-playback-wrap mini-player-track" role="status" aria-live="polite">
+                <span class="live-broadcast-pill">LIVE</span>
+                <span class="live-broadcast-text">
+                    <span id="miniLiveBroadcastPrimary" class="live-broadcast-primary">On Air</span>
+                    <span id="miniLiveBroadcastSecondary" class="live-broadcast-secondary">Loading update...</span>
+                </span>
+                <span id="miniLiveBroadcastTime" class="live-broadcast-time"></span>
+            </div>
+            <div class="mini-player-volume-inline">
+                <button id="miniPlayerVolumeMute" class="sound-icon-button compact" type="button" aria-label="Mute live stream">
+                    <svg viewBox="0 0 24 24" class="sound-icon-svg" aria-hidden="true" focusable="false">
+                        <path class="speaker" d="M3.5 9.5h4.6l4.1-3.5v12l-4.1-3.5H3.5z"></path>
+                        <path class="wave wave-1" d="M14.6 9.2c1.2.8 2 2.1 2 3.8s-.8 3-2 3.8"></path>
+                        <path class="wave wave-2" d="M16.9 6.8c2 1.3 3.3 3.4 3.3 6.2s-1.3 4.9-3.3 6.2"></path>
+                        <path class="mute-slash" d="M16.5 8l5 8"></path>
+                    </svg>
+                </button>
+                <input id="miniPlayerVolume" class="mini-player-volume" type="range" min="0" max="100" step="1" value="100" aria-label="Mini player volume">
+            </div>
+        </div>
+        <div class="mini-player-controls">
+            <button id="miniPlayerToggle" class="mini-player-toggle" type="button" aria-label="Pause playback">⏸</button>
+        </div>
+    </div>
+
+    <!-- Sports Live Streams Section -->
+    <section id="sports" class="sports">
+        <h2>Watch Now - Live Games & Replays</h2>
+
+        <div class="sports-grid">
+
+            <div class="sports-card">
+                <div id="livePreviewThumbnail" class="sports-thumbnail sports-thumbnail-live">
+                    <div class="play-button">▶</div>
+                </div>
+                <h3 id="watchLiveTitle">Live Game Stream</h3>
+                <p id="watchLiveMeta">Current game coverage from McAlester Radio on YouTube.</p>
+                <button class="watch-btn">Watch Now</button>
+            </div>
+
+            <div class="sports-card">
+                <div id="highlightsPreviewThumbnail" class="sports-thumbnail sports-thumbnail-highlights">
+                    <div class="play-button">▶</div>
+                </div>
+                <h3 id="watchHighlightsTitle">Latest Game Replay</h3>
+                <p id="watchHighlightsMeta">Newest recorded game from McAlester Radio YouTube.</p>
+                <button class="watch-btn watch-highlight-btn">Watch Highlights</button>
+            </div>
+
+        </div>
+    </section>
+
+    <div
+        id="gameScoreBanner"
+        class="game-score-banner"
+        aria-label="Live game scoreboard banner"
+        data-score-source-url="https://www.maxpreps.com/ok/mcalester/mcalester-buffaloes/">
+        <div class="score-main-row">
+            <div class="score-team home-team">
+                <div class="team-logo-wrap">
+                    <img src="images/mst-logo.png" alt="McAlester Buffaloes logo" class="team-logo" loading="lazy" decoding="async">
+                </div>
+                <div class="team-meta">
+                    <span id="homeTeamName" class="team-name">McAlester</span>
+                    <span class="team-record" id="homeTeamRecord">-- • District --</span>
+                </div>
+                <span class="team-score" id="homeScore">28</span>
+            </div>
+
+            <div class="score-center-meta">
+                <span id="gameState" class="game-state live">LIVE</span>
+                <span class="game-clock" id="gameClock">Q4 02:31</span>
+                <span class="game-date" id="gameDate">Game Date: --</span>
+                <span class="game-kickoff">Kickoff: 7:00 PM</span>
+                <span class="game-local-time">Local: <span id="gameLocalTime">--:--:--</span></span>
+            </div>
+
+            <div class="score-team away-team">
+                <span class="team-score" id="awayScore">27</span>
+                <div class="team-meta right">
+                    <span id="awayTeamName" class="team-name">Opponent</span>
+                    <span id="awayTeamRecord" class="team-record">Visitor</span>
+                </div>
+                <div class="team-logo-wrap badge-logo" aria-hidden="true">C</div>
+            </div>
+        </div>
+
+        <div class="score-ticker-row">
+            <div id="scoreTickerTrack" class="score-ticker-track">
+                <span>Game Feed:</span>
+                <span>Loading latest game and stats...</span>
+                <span>Game Feed:</span>
+                <span>Loading latest game and stats...</span>
+            </div>
+        </div>
+    </div>
+
+    <section id="liveScoreboard" class="live-scoreboard">
+        <h2>Live Scoreboard & Game Statistics</h2>
+        <p id="scoreboardSubtitle" class="scoreboard-subtitle">McAlester Sports • Live stats auto-sync</p>
+
+        <div class="scoreboard-grid">
+            <div class="scoreboard-card highlight">
+                <h3>Season Snapshot</h3>
+                <div class="score-pills">
+                    <span id="overallRecordPill" class="score-pill">Overall: --</span>
+                    <span id="districtRecordPill" class="score-pill">District: --</span>
+                </div>
+                <p class="score-note">Latest available team status and results.</p>
+            </div>
+
+            <div class="scoreboard-card">
+                <h3>Recent Results</h3>
+                <ul id="recentResultsList" class="score-list">
+                    <li><strong>Nov 21, 2025:</strong> McAlester 0 - 55 Carl Albert (Final)</li>
+                    <li><strong>Nov 14, 2025:</strong> McAlester 28 - 27 Collinsville (Final)</li>
+                    <li><strong>Nov 7, 2025:</strong> McAlester 34 - 7 Shawnee (Final)</li>
+                </ul>
+            </div>
+
+            <div class="scoreboard-card">
+                <h3>Recent Team Stats</h3>
+                <ul id="recentStatsList" class="score-list">
+                    <li><strong>vs Carl Albert:</strong> 31 passing • 60 rushing • 31 receiving</li>
+                    <li><strong>vs Collinsville:</strong> 148 passing • 71 rushing • 148 receiving</li>
+                    <li><strong>vs Shawnee:</strong> 200 passing • 222 rushing • 200 receiving</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="news">
+        <h2>Latest News</h2>
+
+        <div class="news-grid">
+
+            <div class="news-card" data-news="community">
+                <h3>Local News</h3>
+                <p>Daily McAlester area headlines and public safety updates from the MST newsroom.</p>
+            </div>
+
+            <div class="news-card" data-news="sports">
+                <h3>Artist Interviews</h3>
+                <p>Catch K101 artist interviews, live performances, and podcast highlights.</p>
+            </div>
+
+            <div class="news-card" data-news="weather">
+                <h3>Station Updates</h3>
+                <p>Thunder Connection broadcasts, election-night coverage, and special programming alerts.</p>
+            </div>
+
+            <div class="news-card" data-news="jobListings">
+                <h3>Job Listings</h3>
+                <p>Open the local hiring article with listings details, source link, and article-page layout support.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <h2>Upcoming Events</h2>
+
+        <div class="event-grid">
+
+            <div class="event-card" data-event="festival">
+                <h3>Rise Up Country</h3>
+                <p>Every Sunday • 9:00 AM-11:00 AM • K101 special programming block</p>
+            </div>
+
+            <div class="event-card" data-event="concert">
+                <h3>Thunder Connection Live Season</h3>
+                <p>K-101 is your Thunder connection in Southeastern Oklahoma all season long</p>
+            </div>
+
+            <div class="event-card" data-event="tournament">
+                <h3>Community Calendar Highlights</h3>
+                <p>City notices, local events, and civic updates promoted across MST stations</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Local Listings Section -->
+    <section id="local-listings" class="local-listings">
+        <h2>Local Listings</h2>
+
+        <div class="local-listings-grid">
+
+            <article class="local-listing-card">
+                <h3>Job Listings</h3>
+                <p>Find current openings and local employment opportunities posted for the McAlester area.</p>
+                <a class="local-listing-link" href="job-listings.html">View Jobs</a>
+            </article>
+
+            <article class="local-listing-card">
+                <h3>Community Calendar</h3>
+                <p>Browse upcoming local events and submit non-profit events for community promotion.</p>
+                <a class="local-listing-link" href="community-calendar.html">Open Calendar</a>
+            </article>
+
+            <article class="local-listing-card">
+                <h3>Listing Hub</h3>
+                <p>Access the Local Listings page to post ads and view the latest listing availability updates.</p>
+                <a class="local-listing-link" href="https://mcalesterradio.com/local-listings/" target="_blank" rel="noopener noreferrer">Open Listings</a>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Advertising Section -->
+    <section id="advertise" class="advertise">
+        <h2>Advertise With Us</h2>
+        <p class="advertise-intro">Reach thousands of listeners across McAlester and surrounding communities</p>
+
+        <div class="pricing-grid">
+
+            <div class="pricing-card" data-plan="starter">
+                <h3>Starter</h3>
+                <div class="price">$99<span>/month</span></div>
+                <ul class="benefits">
+                    <li>✓ 30-second spot</li>
+                    <li>✓ 5 plays per day</li>
+                    <li>✓ One station</li>
+                    <li>✓ Email support</li>
+                    <li>✗ Custom production</li>
+                </ul>
+                <button class="cta-btn plan-btn">View Details</button>
+            </div>
+
+            <div class="pricing-card featured" data-plan="professional">
+                <div class="badge">Most Popular</div>
+                <h3>Professional</h3>
+                <div class="price">$299<span>/month</span></div>
+                <ul class="benefits">
+                    <li>✓ 60-second spot</li>
+                    <li>✓ 10 plays per day</li>
+                    <li>✓ All 4 stations</li>
+                    <li>✓ Phone & email support</li>
+                    <li>✓ Custom production</li>
+                </ul>
+                <button class="cta-btn featured-btn plan-btn">View Details</button>
+            </div>
+
+            <div class="pricing-card" data-plan="premium">
+                <h3>Premium</h3>
+                <div class="price">$599<span>/month</span></div>
+                <ul class="benefits">
+                    <li>✓ 60-second + 30-second spots</li>
+                    <li>✓ 15 plays per day</li>
+                    <li>✓ All 4 stations</li>
+                    <li>✓ Priority support</li>
+                    <li>✓ Custom production & editing</li>
+                </ul>
+                <button class="cta-btn plan-btn">View Details</button>
+            </div>
+
+        </div>
+
+        <div class="advertise-cta">
+            <p>Have a custom advertising need?</p>
+            <a href="#contact" class="btn">Contact Our Sales Team</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact MST</h2>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                
+                <div class="info-block">
+                    <h4>Phone Numbers</h4>
+                    <p><strong>KMCO 101.3 FM:</strong> <a href="tel:918-426-1050">918-426-1050</a></p>
+                    <p><strong>KNED 1150 AM:</strong> <a href="tel:918-423-1460">918-423-1460</a></p>
+                    <p><strong>KTMC 105.1 FM:</strong> <a href="tel:918-423-6050">918-423-6050</a></p>
+                    <p><strong>KTMC 1400 AM:</strong> <a href="tel:918-423-1400">918-423-1400</a></p>
+                </div>
+
+                <div class="info-block">
+                    <h4>Other Contact Methods</h4>
+                    <p><strong>Fax:</strong> 918-423-7119</p>
+                    <p><strong>Email:</strong> <a href="mailto:sales@mcalesterradio.com">sales@mcalesterradio.com</a></p>
+                </div>
+
+                <div class="info-block">
+                    <h4>Physical Address</h4>
+                    <p>1801 E Electric Ave<br>McAlester, OK 74501</p>
+                </div>
+            </div>
+
+            <form id="contactForm" class="contact-form">
+                <h3>Send us a Message</h3>
+
+                <input
+                    type="text"
+                    placeholder="Your Name"
+                    required>
+
+                <input
+                    type="email"
+                    placeholder="Email Address"
+                    required>
+
+                <textarea
+                    rows="6"
+                    placeholder="Your Message"
+                    required></textarea>
+
+                <button type="submit">
+                    Send Message
+                </button>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section id="subscribe" class="subscribe">
+        <h2>Stay Updated</h2>
+        <p>Get the latest news, events, and exclusive updates delivered to your inbox and phone</p>
+        <button id="subscribeBtn" class="btn-subscribe">Subscribe to Updates</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            K101 • ROCK 105 • KNED • COOL 96.7
+        </p>
+
+        <p class="copyright">
+            © 2025 McAlester Streaming Technologies
+        </p>
+    </footer>
+
+    <!-- Events Modal -->
+    <div id="eventsModal" class="news-modal">
+        <div class="news-modal-content">
+            <span class="close-btn-events" title="Close">&times;</span>
+            <h2 id="eventsModalTitle">Local Events</h2>
+            <div id="eventsModalBody" class="modal-articles">
+            </div>
+        </div>
+    </div>
+
+    <!-- Advertise Modal -->
+    <div id="advertiseModal" class="news-modal">
+        <div class="news-modal-content">
+            <span class="close-btn-advertise" title="Close">&times;</span>
+            <h2 id="advertiseModalTitle">Advertising Plan</h2>
+            <div id="advertiseModalBody" class="modal-articles">
+            </div>
+        </div>
+    </div>
+
+    <!-- News Modal -->
+    <div id="newsModal" class="news-modal">
+        <div class="news-modal-content">
+            <span class="close-btn" title="Close">&times;</span>
+            <h2 id="modalTitle">News</h2>
+            <div id="modalBody" class="modal-articles">
+            </div>
+        </div>
+    </div>
+
+    <!-- Subscribe Modal -->
+    <div id="subscribeModal" class="news-modal">
+        <div class="news-modal-content subscribe-modal-content">
+            <span class="close-btn-subscribe" title="Close">&times;</span>
+            <h2>Create Account & Subscribe</h2>
+            <form id="subscribeForm" class="subscribe-form">
+                <input type="text" id="subName" placeholder="First and Last Name" required>
+                <input type="email" id="subEmail" placeholder="Email Address" required>
+                <input type="tel" id="subPhone" placeholder="Phone Number (for SMS updates)" required>
+                <div class="password-field">
+                    <input type="password" id="subPassword" placeholder="Create Password" required>
+                    <label class="show-password-label">
+                        <input type="checkbox" id="showSubPassword" class="show-password-toggle">
+                        <span class="password-icon"><svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                    </label>
+                </div>
+                <div class="password-field">
+                    <input type="password" id="subConfirmPassword" placeholder="Confirm Password" required>
+                    <label class="show-password-label">
+                        <input type="checkbox" id="showSubConfirmPassword" class="show-password-toggle">
+                        <span class="password-icon"><svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                    </label>
+                </div>
+
+                <div id="passwordRequirements" class="password-requirements" aria-live="polite">
+                    <p>Password requirements:</p>
+                    <ul>
+                        <li id="reqLength" class="requirement-item invalid"><span class="req-icon">X</span>At least 6 characters</li>
+                        <li id="reqUpper" class="requirement-item invalid"><span class="req-icon">X</span>At least 1 uppercase letter</li>
+                    </ul>
+                </div>
+                
+                <div class="subscribe-preferences">
+                    <label><input type="checkbox" id="emailUpdates" checked> Email Updates</label>
+                    <label><input type="checkbox" id="smsUpdates" checked> Text Message Updates</label>
+                </div>
+
+                <div class="subscription-selection">
+                    <label for="subTier">Choose Your Streaming Plan: <span class="plan-optional">optional</span></label>
+                    <select id="subTier">
+                        <option value="">-- None --</option>
+                        <option value="basic">Basic - $4.99/month</option>
+                        <option value="premium">Premium - $9.99/month</option>
+                        <option value="family">Family - $14.99/month</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-submit">Create Account & Subscribe</button>
+                <p id="subscribeMessage" class="form-message"></p>
+                <p class="auth-switch-text">Already have an account? <button type="button" id="switchToSignInBtn" class="auth-switch-link">Sign In</button></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="news-modal">
+        <div class="news-modal-content subscribe-modal-content">
+            <span class="close-btn-subscribe" title="Close">&times;</span>
+            <h2>Sign In</h2>
+            <form id="signInForm" class="subscribe-form">
+                <input type="email" id="signInEmail" placeholder="Email Address" required>
+                <div class="password-field">
+                    <input type="password" id="signInPassword" placeholder="Password" required>
+                    <label class="show-password-label">
+                        <input type="checkbox" id="showSignInPassword" class="show-password-toggle">
+                        <span class="password-icon"><svg viewBox="0 0 24 24" width="1.2em" height="1.2em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                    </label>
+                </div>
+                <button type="submit" class="btn-submit">Sign In</button>
+                <p id="signInMessage" class="form-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="news-modal">
+        <div class="news-modal-content profile-modal-content">
+            <span class="close-btn-subscribe" title="Close">&times;</span>
+            <h2>Your Profile</h2>
+            
+            <!-- User Info Section -->
+            <div class="profile-section">
+                <h3>Account Information</h3>
+                <div class="profile-info-card">
+                    <div class="profile-field">
+                        <span class="profile-label">Name</span>
+                        <span class="profile-value" id="profileName"></span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="profile-label">Email</span>
+                        <span class="profile-value" id="profileEmail"></span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="profile-label">Phone</span>
+                        <span class="profile-value" id="profilePhone"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preferences Section -->
+            <div class="profile-section">
+                <h3>Communication Preferences</h3>
+                <div class="preferences-card">
+                    <label class="preference-checkbox">
+                        <input type="checkbox" id="profileEmailUpdates">
+                        <span class="checkbox-label">Email Updates</span>
+                    </label>
+                    <label class="preference-checkbox">
+                        <input type="checkbox" id="profileSmsUpdates">
+                        <span class="checkbox-label">Text Message Updates</span>
+                    </label>
+                    <button id="updatePreferencesBtn" class="btn-update-prefs">Save Preferences</button>
+                </div>
+            </div>
+
+            <!-- Subscription Section -->
+            <div class="profile-section">
+                <h3>Streaming Subscription</h3>
+                <div class="subscription-info-card">
+                    <div class="sub-status">
+                        <div class="status-row">
+                            <span class="status-label">Plan</span>
+                            <span class="status-value" id="profileSubscriptionTier">--</span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">Next Billing Date</span>
+                            <span class="status-value" id="profileBillingDate">--</span>
+                        </div>
+                        <div class="status-row">
+                            <span class="status-label">Status</span>
+                            <span class="status-value status-active" id="profileSubStatus">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Method Section -->
+            <div class="profile-section">
+                <h3>Payment Method</h3>
+                <div class="payment-card">
+                    <div id="paymentDisplay" class="payment-display">
+                        <p id="paymentInfo" style="color: #b0b0b0; text-align: center;">No payment method added</p>
+                    </div>
+                    <button id="editPaymentBtn" class="btn-edit-payment">Add/Edit Payment Method</button>
+                </div>
+            </div>
+
+            <!-- Payment Modal -->
+            <div id="paymentModal" class="payment-modal">
+                <div class="payment-modal-content">
+                    <h4>Add Payment Method for <span id="paymentPackageName">Your Plan</span></h4>
+                    <form id="paymentForm">
+                        <input type="text" id="cardholderName" placeholder="Cardholder Name" required>
+                        <input type="text" id="cardNumber" placeholder="Card Number (16 digits)" maxlength="16" required>
+                        <div class="payment-row">
+                            <input type="text" id="expirationDate" placeholder="MM/YY" maxlength="5" required>
+                            <input type="text" id="cvv" placeholder="CVV" maxlength="3" required>
+                        </div>
+                        <input type="text" id="billingAddress" placeholder="Billing Address" required>
+                        <input type="text" id="billingCity" placeholder="City" required>
+                        <div class="payment-row">
+                            <input type="text" id="billingState" placeholder="State" required>
+                            <input type="text" id="billingZip" placeholder="ZIP Code" required>
+                        </div>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; margin: 1rem 0; cursor: pointer;">
+                            <input type="checkbox" id="billingAgreement" required>
+                            <span style="color: #b0b0b0;">I agree to the billing terms</span>
+                        </label>
+                        <div class="payment-buttons">
+                            <button type="submit" class="btn-save-payment">Complete Payment</button>
+                            <button type="button" class="btn-cancel-payment">Cancel</button>
+                        </div>
+                        <p id="paymentMessage" class="form-message"></p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sign Out Section -->
+            <div class="profile-actions">
+                <button id="signOutBtn" class="btn-sign-out">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subscriptions Popup Modal (for Watch Now) -->
+    <div id="subscriptionsModal" class="news-modal">
+        <div class="news-modal-content subscribe-modal-content" style="max-width: 1120px; width: 95vw;">
+            <span class="close-btn-subscribe" title="Close">&times;</span>
+            <h2>Choose Your Streaming Plan</h2>
+            <p style="text-align: center; color: #b0b0b0; margin-bottom: 2rem;">Unlock access to live streaming with MST Radio Network</p>
+            <p id="subscriptionsAccessMessage" class="form-message"></p>
+            
+            <div class="subscriptions-grid-modal">
+                <div class="subscription-card" data-tier="basic">
+                    <h3>Basic</h3>
+                    <div class="sub-price">$4.99<span>/month</span></div>
+                    <ul class="sub-features">
+                        <li>✓ Ad-supported streaming</li>
+                        <li>✓ Access to all 4 stations</li>
+                        <li>✓ Mobile app access</li>
+                    </ul>
+                </div>
+
+                <div class="subscription-card featured" data-tier="premium">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="sub-price">$9.99<span>/month</span></div>
+                    <ul class="sub-features">
+                        <li>✓ Ad-free streaming</li>
+                        <li>✓ All 4 stations + bonus content</li>
+                        <li>✓ Download for offline</li>
+                    </ul>
+                </div>
+
+                <div class="subscription-card" data-tier="family">
+                    <h3>Family</h3>
+                    <div class="sub-price">$14.99<span>/month</span></div>
+                    <ul class="sub-features">
+                        <li>✓ Ad-free for 4 users</li>
+                        <li>✓ All stations & exclusive content</li>
+                        <li>✓ 24/7 support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div id="siteToast" class="site-toast" role="status" aria-live="polite"></div>
+
+            <!-- Sign Out Section -->
+    <script src="main.js"></script>
+</body>
+</html>

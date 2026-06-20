@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Event - MST Radio Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="persistent-player.js?v=20260620" defer></script>
+    <style>
+        .event-detail-page {
+            min-height: 100vh;
+            background: #2a2a2a;
+            padding: 3.25rem 1.25rem;
+        }
+
+        .event-detail-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .event-detail-card {
+            background: linear-gradient(140deg, rgba(16, 16, 16, 0.96), rgba(38, 38, 38, 0.94));
+            border: 1px solid rgba(212, 175, 55, 0.72);
+            border-radius: 14px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+            padding: 1.2rem;
+        }
+
+        .event-detail-date {
+            color: #ffed4e;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.45rem;
+        }
+
+        .event-detail-title {
+            margin: 0;
+            color: #ffffff;
+            font-size: 1.7rem;
+            line-height: 1.25;
+        }
+
+        .event-detail-venue {
+            margin-top: 0.75rem;
+            color: #d2d2d2;
+            font-size: 0.96rem;
+            line-height: 1.5;
+        }
+
+        .event-detail-description {
+            margin-top: 0.95rem;
+            color: #f1f1f1;
+            line-height: 1.75;
+            font-size: 1rem;
+            white-space: pre-wrap;
+        }
+
+        .event-detail-actions {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .event-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            border-radius: 8px;
+            background: rgba(255, 237, 78, 0.08);
+            color: #ffed4e;
+            padding: 0.52rem 0.88rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .event-btn:hover,
+        .event-btn:focus-visible {
+            background: rgba(255, 237, 78, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header id="home">
+        <div class="logo">
+            <img src="images/mst-logo.png" alt="MST Logo">
+        </div>
+
+        <div class="menu-toggle">☰</div>
+
+        <ul class="menu">
+            <li><a href="index.html?skipLoading=1#home">Home</a></li>
+            <li><a href="index.html#stations">Stations</a></li>
+            <li><a href="index.html#stations">Listen Live</a></li>
+            <li><a href="index.html#sports">Watch Now</a></li>
+            <li><a href="index.html#news">News</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="index.html#local-listings">Local Listings</a></li>
+            <li><a href="index.html#advertise">Advertise</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a href="index.html#sports" class="live-btn watch-now-disabled" aria-disabled="true">LIVE NOW</a>
+    </header>
+
+    <main class="event-detail-page">
+        <section class="event-detail-wrap">
+            <article class="event-detail-card" id="eventDetailCard">
+                <div id="eventDate" class="event-detail-date">Event</div>
+                <h1 id="eventTitle" class="event-detail-title">Event Not Found</h1>
+                <p id="eventVenue" class="event-detail-venue"></p>
+                <p id="eventDescription" class="event-detail-description"></p>
+                <div class="event-detail-actions">
+                    <a class="event-btn" href="community-calendar.html">Go Back to Community Calendar</a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="community-past-events.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const eventId = Number(params.get('id'));
+        const events = Array.isArray(window.COMMUNITY_PAST_EVENTS) ? window.COMMUNITY_PAST_EVENTS : [];
+        const event = events.find(item => Number(item.id) === eventId);
+
+        const eventDateEl = document.getElementById('eventDate');
+        const eventTitleEl = document.getElementById('eventTitle');
+        const eventVenueEl = document.getElementById('eventVenue');
+        const eventDescriptionEl = document.getElementById('eventDescription');
+
+        if (event) {
+            const title = String(event.title || '').trim() || 'Untitled Event';
+            const date = String(event.date || '').trim() || 'Date TBD';
+            const venue = String(event.venue || '').trim();
+            const description = String(event.description || '').trim();
+
+            document.title = `${title} - Community Event`;
+            eventDateEl.textContent = date;
+            eventTitleEl.textContent = title;
+            eventVenueEl.textContent = venue || 'Venue details unavailable.';
+            eventDescriptionEl.textContent = description || 'No additional event description is available for this listing.';
+        } else {
+            eventDateEl.textContent = 'Event';
+            eventTitleEl.textContent = 'Event Not Found';
+            eventVenueEl.textContent = 'We could not locate this event in the local calendar data.';
+            eventDescriptionEl.textContent = 'Return to the Community Calendar and choose another past event.';
+        }
+    </script>
+</body>
+</html>

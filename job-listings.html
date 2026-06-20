@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Listings - MST Radio Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="persistent-player.js?v=20260620" defer></script>
+    <style>
+        .jobs-page {
+            background: #2a2a2a;
+            min-height: 100vh;
+            padding: 3.5rem 1.25rem;
+        }
+
+        .jobs-wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .jobs-card {
+            background: linear-gradient(140deg, rgba(16, 16, 16, 0.96), rgba(38, 38, 38, 0.94));
+            border: 1px solid rgba(212, 175, 55, 0.7);
+            border-radius: 14px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.42);
+            padding: 1.25rem;
+        }
+
+        .jobs-title {
+            color: #ffed4e;
+            font-size: 2rem;
+            margin: 0 0 0.6rem;
+        }
+
+        .jobs-lead {
+            color: #d7d7d7;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .jobs-county-title {
+            color: #ffffff;
+            font-size: 1.55rem;
+            letter-spacing: 0.04em;
+            margin: 0 0 0.6rem;
+            text-transform: uppercase;
+        }
+
+        .jobs-role-block {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            border-radius: 10px;
+            padding: 0.95rem;
+            margin-bottom: 0.95rem;
+        }
+
+        .jobs-role-block h3 {
+            color: #d4af37;
+            margin: 0 0 0.45rem;
+            font-size: 1.05rem;
+        }
+
+        .jobs-role-block ul {
+            margin: 0;
+            padding-left: 1.15rem;
+            color: #f2f2f2;
+            line-height: 1.5;
+        }
+
+        .jobs-role-block li {
+            margin-bottom: 0.25rem;
+        }
+
+        .jobs-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            border-radius: 10px;
+            padding: 0.95rem;
+        }
+
+        .jobs-item h3 {
+            color: #d4af37;
+            margin: 0 0 0.4rem;
+            font-size: 1.05rem;
+        }
+
+        .jobs-item p {
+            color: #cfcfcf;
+            margin: 0;
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .jobs-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.95rem;
+        }
+
+        .jobs-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background: #d4af37;
+            color: #1a1a1a;
+            border-radius: 8px;
+            padding: 0.58rem 1rem;
+            font-weight: 700;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .jobs-btn:hover,
+        .jobs-btn:focus-visible {
+            background: #ffed4e;
+            transform: translateY(-1px);
+        }
+
+        .jobs-source {
+            color: #b8b8b8;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .jobs-source a {
+            color: #ffed4e;
+            text-decoration: none;
+        }
+
+        .jobs-source a:hover {
+            text-decoration: underline;
+        }
+
+        .jobs-flyer-footer {
+            margin-top: 1rem;
+            color: #d0d0d0;
+            font-size: 0.83rem;
+            line-height: 1.45;
+        }
+    </style>
+</head>
+<body>
+    <header id="home">
+        <div class="logo">
+            <img src="images/mst-logo.png" alt="MST Logo">
+        </div>
+
+        <div class="menu-toggle">☰</div>
+
+        <ul class="menu">
+            <li><a href="index.html?skipLoading=1#home">Home</a></li>
+            <li><a href="index.html#stations">Stations</a></li>
+            <li><a href="index.html#stations">Listen Live</a></li>
+            <li><a href="index.html#sports">Watch Now</a></li>
+            <li><a href="index.html#news">News</a></li>
+            <li><a href="index.html#events">Events</a></li>
+            <li><a href="index.html#local-listings">Local Listings</a></li>
+            <li><a href="index.html#advertise">Advertise</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <a href="index.html#sports" class="live-btn watch-now-disabled" aria-disabled="true">LIVE NOW</a>
+    </header>
+
+    <main class="jobs-page">
+        <section class="jobs-wrap">
+            <article class="jobs-card">
+                <h1 class="jobs-title">Local Job Listings</h1>
+                <p class="jobs-lead">This page now hosts the full listings text directly so your site can stand on its own.</p>
+                <div class="jobs-actions">
+                    <a class="jobs-btn" href="index.html?skipLoading=1#home">Go Back Home</a>
+                </div>
+            </article>
+
+            <article class="jobs-card">
+                <h2 class="jobs-county-title">Pittsburg County</h2>
+
+                <div class="jobs-role-block">
+                    <h3>Komar Distribution Center - McAlester</h3>
+                    <ul>
+                        <li>Staff Accountant</li>
+                        <li>Call Center Manager</li>
+                        <li>Call Center Representatives</li>
+                        <li>Send resume to bsartain@komr-okla.com</li>
+                    </ul>
+                </div>
+
+                <div class="jobs-role-block">
+                    <h3>ABC Supply Co - McAlester NEW!!!</h3>
+                    <ul>
+                        <li>Outside Sales - step slope Roofing Specialist</li>
+                        <li>Apply on company site at https://abcsupply.wd1.myworkdayjobs.com/ABCSupplyCareers</li>
+                    </ul>
+                </div>
+
+                <div class="jobs-role-block">
+                    <h3>City of McAlester</h3>
+                    <ul>
+                        <li>911 Communications Officer/Dispatcher</li>
+                        <li>Police Recruit</li>
+                        <li>Apply online at www.cityofmcalester.com</li>
+                    </ul>
+                </div>
+
+                <div class="jobs-role-block">
+                    <h3>McAlester Regional Health Center - McAlester NEW!!!</h3>
+                    <ul>
+                        <li>Customer Service Specialist</li>
+                        <li>Licensed Electrician</li>
+                        <li>Sterile Room Tech</li>
+                        <li>Rad Tech I</li>
+                        <li>Dishwasher Tech</li>
+                        <li>Apply online at https://www.mrhcok.com/careers/</li>
+                    </ul>
+                </div>
+
+                <div class="jobs-role-block">
+                    <h3>Bealls - McAlester NEW!!!</h3>
+                    <ul>
+                        <li>Merchandise Supervisor</li>
+                        <li>Store Associate</li>
+                        <li>Apply online at https://www.beallsinc.com/</li>
+                    </ul>
+                </div>
+
+                <p class="jobs-flyer-footer">
+                    Southern Workforce Board contact shown on flyer: 580-740-4880 • mcoo@swb-ok.com • swb-ok.com/business-services
+                </p>
+                <p class="jobs-flyer-footer">
+                    SWB is an Equal Opportunity Employer/Program and Activities. Auxiliary aids and services are available upon request to individuals with disabilities.
+                    If English is not your preferred language, contact One Stop Operator, ososouthern@gmail.com, 1414 E Wade Watts Ave, McAlester, OK, 74501,
+                    (580) 634-1853 TDD/TTY: 711 or 800-722-0353 to obtain translation and/or interpretation services for the content of this document.
+                </p>
+            </article>
+
+            <article class="jobs-card">
+                <div class="jobs-grid">
+                    <div class="jobs-item">
+                        <h3>Related Local Resources</h3>
+                        <p>Community Calendar and Local Listings links are still available below for quick access.</p>
+                    </div>
+                    <div class="jobs-item">
+                        <h3>Community Calendar</h3>
+                        <p>Check nearby events and local non-profit notices.</p>
+                        <div class="jobs-actions">
+                            <a class="jobs-btn" href="community-calendar.html">Open Calendar</a>
+                        </div>
+                    </div>
+                    <div class="jobs-item">
+                        <h3>Local Listings Hub</h3>
+                        <p>Browse other local listing categories and resources.</p>
+                        <div class="jobs-actions">
+                            <a class="jobs-btn" href="https://mcalesterradio.com/local-listings/" target="_blank" rel="noopener noreferrer">Open Listing Hub</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
